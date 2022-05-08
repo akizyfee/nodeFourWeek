@@ -14,8 +14,9 @@ const postSchema = new mongoose.Schema(
             default: Date.now,
             // select: false
         },
-        name: {
-            type: String,
+        user: {
+            type: mongoose.Schema.ObjectId,
+            ref: "user",//連結到user集合
             required: [true, '貼文姓名未填寫']
         },
         likes: {

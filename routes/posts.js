@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const Post = require("../models/posts")
+const Post = require("../models/postsModel");
+const User = require("../models/usersModel");
 
 
 router.get('/', async function (req, res, next) {
   const timeSort = req.query.timeSort == "asc" ? "createdAt" : "-createdAt"
   const q = req.query.q !== undefined ? { "content": new RegExp(req.query.q) } : {};
-  const post = await Post.find(q).sort(timeSort);
+  const post = await Post.find(q).populate({
+    path: 'user',
+    select: 'name photo '
+  }).sort(timeSort);
   res.status(200).json({
     status: "success",
     post

@@ -12,7 +12,7 @@ mongoose.connect(DB).then(() => {
   console.log('連線資料庫成功');
 })
 
-var postRouter = require('./routes/index');
+var postRouter = require('./routes/posts');
 
 var app = express();
 app.use(cors());
