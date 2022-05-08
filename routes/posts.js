@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const Post = require("../models/postsModel");
-const User = require("../models/usersModel");
 
 
 router.get('/', async function (req, res, next) {
@@ -9,7 +8,7 @@ router.get('/', async function (req, res, next) {
   const q = req.query.q !== undefined ? { "content": new RegExp(req.query.q) } : {};
   const post = await Post.find(q).populate({
     path: 'user',
-    select: 'name photo '
+    select: 'name photo'
   }).sort(timeSort);
   res.status(200).json({
     status: "success",
