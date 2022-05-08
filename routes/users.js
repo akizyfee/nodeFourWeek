@@ -11,3 +11,4 @@ router.get('/', async function (req, res, next) {
         user
     })
 })
+module.exports = router;
