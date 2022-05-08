@@ -79,12 +79,19 @@ router.patch('/:id', async function (req, res, next) {
 
 router.delete('/', async function (req, res, next) {
 
-  const DeleteAll = await Post.deleteMany({})
+  if (req.originalUrl === '/posts/') {
+    res.status(400).json({
+      status: "false",
+      message: "無此網站路由"
+    })
+  } else {
+    const DeleteAll = await Post.deleteMany({})
 
-  res.status(200).json({
-    status: 'success',
-    DeleteAll
-  })
+    res.status(200).json({
+      status: 'success',
+      DeleteAll
+    })
+  }
 })
 
 router.delete('/deletone/:id', async function (req, res, next) {
